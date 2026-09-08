@@ -1,0 +1,23 @@
+DETAILED RESPONSE REQUIRED.
+
+You are the motion design director on a $20k-agency marketing site. I need a SHOWSTOPPING animation concept, then implementation guidance.
+
+CONTEXT:
+Site: University Alumni Travel Club (UATC) — collegiate, energetic, conversion-focused.
+Hero layout: left = headline copy ("YOUR CREW. YOUR COLORS. YOUR NEXT TRIP." word-by-word blur-fade reveal + CTAs), right = an Andy Warhol-style grid of 12 DISTINCT collegiate crest emblems (4 wide x 3 tall, each tile a different shield/seal design, each in different school colors — crimson, navy, orange, green, blue, burgundy, purple, red, black, royal, garnet, orange/green).
+CURRENT animation: tiles spring in staggered monochrome, then school colors flood row-by-row (opacity crossfade per row). It works but the client wants to be WOWED — this is the site's one signature moment.
+
+CONSTRAINTS:
+- Stack: Next.js 16.3 (static export), Tailwind v4, Framer Motion (motion package), no WebGL required but GSAP available via motion-system baseline (expo.out reveals, power2.inOut, spring {stiffness 120, damping 10} nav)
+- 12 full-res PNG crest images (~1.3MB each) — total payload consideration
+- Must not delay the headline (copy animates first, grid is the spectacle)
+- Reduced-motion path must degrade to static visible grid
+- Performance law: 55fps+, transform/opacity-only
+
+QUESTION 1 — THE CONCEPT: Design the wowing open. Think beyond a simple stagger. Ideas to pressure-test or improve: (a) tiles physically FALL from above with rotation + bounce-settle like landing patches, staggered from corners inward; (b) tiles fly IN from off-screen along arc paths like cards being dealt/thrown onto a table, each with spin; (c) a 3D perspective wall where tiles slam in from z-depth with parallax settle; (d) mosaic flip: monochrome wall flips tile-by-tile to color like a stadium card section; (e) physics/collision: tiles drop with gravity, bounce off each other into their grid slots; (f) something better you invent. Which ONE concept is the strongest wow-per-effort for a page-open moment, and why? Be decisive — one primary concept, one backup.
+
+QUESTION 2 — CHOREOGRAPHY: For the winning concept, give the exact timeline beats (delays, durations, easing per phase) from page open to settle. Include how it coordinates with the headline reveal. What easing per phase? What rotation/scale/offset per tile? Should tiles enter from off-viewport or z-depth? Where does the school-color reveal land in the sequence (before landing, during, after-settle)?
+
+QUESTION 3 — TECH: Best implementation given the stack. Framer Motion variants? GSAP timeline? A known 21st.dev / Aceternity / MagicUI component that does this (name it)? Key pitfalls: hydration with SSR, 12 simultaneous animations perf, mobile (12 tiles on small viewport), reduced-motion.
+
+Output format: ANSWER 1 (concept, decisive), ANSWER 2 (timeline beats table-ish), ANSWER 3 (tech choice + pitfalls). ~500 words. End with "ANIMATION SPEC COMPLETE". DETAILED RESPONSE REQUIRED.

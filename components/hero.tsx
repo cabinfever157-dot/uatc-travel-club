@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { UatcMark, TravelStripe } from "@/components/brand";
 import { SCHOOLS, GRID_SCHOOL_IDS, CTA_URL } from "@/lib/uatc";
+import { PatchGrid } from "@/components/patch-grid";
 
 // HERO — Warhol grid color-flood signature.
 // Tiles stagger in monochrome; college colors flood row-by-row.
 export function Hero() {
-  const grid = GRID_SCHOOL_IDS.map((id) => SCHOOLS.find((s) => s.id === id)!);
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-black pt-28 md:pt-32">
@@ -105,64 +105,16 @@ export function Hero() {
           </motion.p>
         </div>
 
-        {/* Warhol grid — 12 tiles, 4×3, pure mark, color flood by row */}
-        <div className="relative pb-10">
-          <div className="grid grid-cols-4 gap-3 md:gap-4 max-w-md mx-auto lg:ml-auto lg:mr-0">
-            {grid.map((s, i) => {
-              const row = Math.floor(i / 4); // 0,1,2
-              return (
-                <motion.div
-                  key={s.id}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 210,
-                    damping: 16,
-                    delay: 0.45 + i * 0.07,
-                  }}
-                  className="aspect-square rounded-md overflow-hidden bg-cream/5 border border-white/10"
-                >
-                  {/* color flood: school-color frame, distinct crest design per tile */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.9, delay: 1.55 + row * 0.55 }}
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ background: s.c1 }}
-                  >
-                    <img
-                      src={`/images/gen/logos/logo-tile${String(i + 1).padStart(2, "0")}.png`}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  {/* monochrome underlay shown until flood covers it */}
-                  <motion.div
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: 0 }}
-                    transition={{ duration: 0.9, delay: 1.55 + row * 0.55 }}
-                    className="absolute inset-0 flex items-center justify-center bg-[#141414]"
-                  >
-                    <img
-                      src={`/images/gen/logos/logo-tile${String(i + 1).padStart(2, "0")}.png`}
-                      alt=""
-                      className="w-full h-full object-cover opacity-45 grayscale"
-                    />
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 3.4, duration: 0.8 }}
-            className="mt-4 text-xs tracking-[0.18em] uppercase text-cream/40 text-center lg:text-right max-w-md mx-auto lg:mr-0"
-          >
-            Your colors are already on the bus
-          </motion.p>
-        </div>
+        {/* THE VARSITY PATCH DROP — face-down slam-in + stadium flip wave */}
+        <PatchGrid />
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.4, duration: 0.8 }}
+          className="pb-6 -mt-2 text-xs tracking-[0.18em] uppercase text-cream/40 text-center lg:text-right max-w-md mx-auto lg:mr-0"
+        >
+          Your colors are already on the bus
+        </motion.p>
       </div>
 
       {/* bottom Travel Stripe seam into Follow Your Team */}
