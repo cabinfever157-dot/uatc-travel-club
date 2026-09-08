@@ -1,0 +1,3 @@
+UATC logo mark, flat vector style. A bold varsity athletic letter "U" monogram centered inside a circular badge ring. The negative space inside the U subtly forms an upward-pointing road or path leading to a small notch at the top, like a ticket stub perforation. Solid white monogram on a solid black background, perfectly flat colors, no gradients, no shadows, no texture, no text besides the U letterform itself, thick confident strokes, geometric, symmetric left-right, high contrast, designed as a two-color recolorable logo system suitable for pop-art style color variations. Square 1:1 composition, generous padding around the badge.
+
+Then output format: image only, no commentary.

@@ -1,0 +1,21 @@
+
+
+LOGO: Choose (b): design a proper recolorable geometric UATC mark first. The current U-in-ring is too generic to carry the entire signature system; build a bold varsity-inspired “U” monogram inside a simplified circular travel badge, with the negative space subtly forming either a road/path or upward ticket notch. Keep it flat, two-color, stroke-safe, and free of gradients so every tile can instantly inherit arbitrary college-color pairs without the mark becoming visually inconsistent.
+
+
+DISPLAY FONT: Anton over Archivo Black. Anton has the condensed scoreboard/poster authority needed for destinations, savings, capacity, and section statements, while Archivo should remain the cleaner supporting family so the site feels collegiate without becoming a sports-bar theme.
+
+
+WARHOL GRID: Use 12 tiles, ideally 4×3 on desktop; 16 starts feeling like wallpaper unless the hero is extremely restrained elsewhere. Keep the tiles pure mark with no school wordmarks underneath, because recognizable university names introduce licensing/trademark complications and turn a graphic-art moment into a logo directory; the color combinations should create the recognition cue, not borrowed institutional branding.
+
+
+FOLLOW YOUR TEAM MAP: Choose (c), but the real interactive map leads and the cinematic motion supports it. Users should immediately understand “I can find my school/conference and travel to games,” so give them a genuine SVG US map with conference filtering and selectable school/stadium pins; on initial section entry, use one controlled route-drawing sequence to dramatize the concept, then hand control completely to the user. Making the scroll sequence primary would look expensive but weaken the actual sales utility.
+
+
+UNIFYING SIGNATURE: Use a “Travel Stripe” system based on collegiate end-zone/varsity striping, not ticket perforations. A paired stripe travels through the entire site as a controlled graphic thread: section boundary, route line, ticket edge, map path, CTA underline, image crop accent, and occasional vertical navigation marker, changing into guest college-color pairs where appropriate. That gives UATC a proprietary visual grammar rather than repeating literal tickets everywhere until the concept becomes costume design.
+
+
+BIGGEST SLOP RISK: The #1 risk is indiscriminate stacking of every obvious sports cliché: varsity type, scoreboards, tickets, stadium lights, yard lines, college colors, maps, tailgates, badges, and animated counters all competing simultaneously. The guard is a strict “one hero metaphor per viewport” rule: every section gets one dominant branded device, while everything else falls back to disciplined typography, editorial photography, whitespace, and the Travel Stripe system. At $20k, sophistication comes from restraint and hierarchy, not from proving how many themed components the build can generate.
+
+
+ANSWERS COMPLETE

@@ -1,0 +1,29 @@
+DETAILED RESPONSE REQUIRED.
+
+You are the design director on a $20k-agency marketing-site build. Client: Ultimate Alumni Travel Club (UATC) — group travel for university alumni, US-focused. Your job: pressure-test the locked design contract below and answer 6 questions. Be specific and opinionated. Plain text answer, no files, no canvas, ~600 words max.
+
+CLIENT BRIEF (from the client meeting, verbatim key points):
+- Much more collegiate/alumni feel — energetic, fun, travel-oriented, primarily U.S.-focused
+- Tight, modern, conversion-focused: travel savings → Join → Sign In (buttons connect to a member app called Access)
+- Color direction: black + red base, but client also wants different college colors woven throughout
+- Signature visual idea: repeat the UATC logo in different college-color combinations, like an Andy Warhol grid, so people recognize their school colors
+- Major "Follow Your Team" section: US map / Big Ten / Pac-12 / SEC concept showing alumni traveling to football games / tailgating
+- Alumni Adventures: group travel, reunions, weekend trips, organized packages (example: Indiana University to Branson trip, limited group capacity)
+- Marketing site's one job: make people want to join
+
+LOCKED CONTRACT (challenge anything you disagree with):
+- Palette: black #0A0A0A + athletic red #C8102E + cream #FAF7F0; college two-color pairs as GUEST data colors (grid, map pins, section edge bands) only
+- Type: Anton (condensed athletic display) + Archivo (body), 1.333 scale
+- Layout primitive: ticket-stub cards on full-bleed bands — every trip/game package is a notched ticket stub with college-color edge band, big condensed destination type, limited-capacity seat count. Bands alternate black/cream.
+- Signature moments: (1) hero = Warhol logo grid color-flood on scroll, (2) Follow Your Team = interactive US map with conference filter + scroll-drawn travel routes, (3) Adventures = ticket stubs with hover tear-off, (4) scoreboard-flip savings counters, (5) Join band
+- Motion: expo.out reveals, spring nav entrance, 0.4/0.8/1.2s, stagger 0.08-0.1s; no infinite loops, no bouncing buttons
+
+ANSWER THESE 6 QUESTIONS:
+1. LOGO: the only existing mark is a typographic U-in-a-ring (favicon is literally the default create-next-app triangle, not a brand asset). For the Warhol grid, should we (a) recolor the U-in-ring typographic mark, (b) design a proper recolorable geometric UATC mark first — if so, spec it in 2-3 sentences (shape, what the U sits in, what makes it recolor-friendly for a Warhol grid), or (c) something else? Be decisive.
+2. DISPLAY FONT: Anton vs Archivo Black for the collegiate-athletic-but-premium read? One sentence why.
+3. WARHOL GRID: how many logo tiles reads as intentional art vs noise, and should tiles carry school wordmarks under them or stay pure mark?
+4. FOLLOW YOUR TEAM MAP: at a $20k level, is it better as (a) a real interactive SVG map with clickable schools + conference filter, (b) a scroll-driven cinematic route-drawing sequence (pins drop, routes draw to stadiums), or (c) both — filter up top, scroll-draw on entry? If both, which leads?
+5. UNIFYING SIGNATURE: what ONE element binds all sections (beyond the ticket stub)? TIS precedent was a mascot riding a scroll tether. For UATC: stadium-yardline motif? Ticket perforation seams between sections? Something else? Name it.
+6. BIGGEST SLOP RISK: what is the #1 way this build turns into AI slop, and the one guard that prevents it?
+
+Output format: numbered answers 1-6, each 2-5 sentences, decisive. End with "ANSWERS COMPLETE". DETAILED RESPONSE REQUIRED.

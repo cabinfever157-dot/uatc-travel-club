@@ -1,176 +1,140 @@
 @import "tailwindcss";
 
 @theme {
-  /* === Ultimate Alumni Travel Club — Navy + Champagne === */
-  --color-navy: #0a1929;
-  --color-navy-light: #132a43;
-  --color-navy-deep: #050f1c;
-  --color-champagne: #c9a96e;
-  --color-champagne-light: #e0c690;
-  --color-champagne-dark: #9c7c4a;
-  --color-cream: #f5f0e8;
-  --color-cream-warm: #faf6f0;
-  --color-ink: #0a0a0c;
-  --color-ink-light: #2a2a30;
-  --color-ink-muted: #6a6a72;
-  --color-white-warm: #fdfbf7;
-  --color-text-dark: #1a1a2e;
-  --color-text-muted: #5a5a6a;
-  --font-display-fallback: "Georgia", "Times New Roman", serif;
-  --font-sans-fallback: "Inter", "Helvetica Neue", system-ui, sans-serif;
-  --font-label-fallback: "Inter", system-ui, sans-serif;
+  /* UATC — black / athletic red / cream + college guest colors as data */
+  --color-black: #0a0a0a;
+  --color-black-2: #141414;
+  --color-ink: #1c1c1c;
+  --color-red: #c8102e;
+  --color-red-2: #a30d25;
+  --color-cream: #faf7f0;
+  --color-cream-2: #f1ebdd;
+  --font-display: "Anton", "Archivo", sans-serif;
+  --font-sans: "Archivo", system-ui, sans-serif;
 }
 
 @layer base {
-  * {
-    transition:
-      color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  html {
+    scroll-behavior: smooth;
   }
-
   body {
-    background: var(--color-cream-warm);
-    color: var(--color-text-dark);
-    font-family: var(--font-inter), var(--font-sans-fallback);
+    background: var(--color-black);
+    color: #fff;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-
-  h1, h2, h3, h4 {
-    font-family: var(--font-display), var(--font-display-fallback);
-    font-weight: 400;
-    letter-spacing: -0.02em;
+  ::selection {
+    background: var(--color-red);
+    color: #fff;
+  }
+  /* Themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e04b5e, #c8102e, #8d0a20);
+    border-radius: 6px;
+    border: 2px solid #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #8d0a20, #c8102e, #e04b5e);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c8102e #0a0a0a;
   }
 }
 
 @layer utilities {
-  /* === Button glow burst + breathe === */
-  @keyframes glowBurstChampagne {
-    0% { box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: scale(1); }
-    35% { box-shadow: 0 0 50px rgba(201,169,110,0.8), 0 0 100px rgba(224,198,144,0.3); transform: scale(1.08); }
-    100% { box-shadow: 0 0 25px rgba(201,169,110,0.4), 0 0 50px rgba(224,198,144,0.15); transform: scale(1.04); }
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
   }
 
-  .btn-primary {
-    background: linear-gradient(180deg, #d4b87e 0%, #c9a96e 50%, #9c7c4a 100%);
-    color: #0a1929;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 27%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transform: scale(1);
-    transition: background 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s cubic-bezier(0.16,1,0.3,1);
-    font-weight: 600;
-    letter-spacing: 0.02em;
+  /* Travel Stripe — the end-zone pair. Base red pair; colorized variants set inline. */
+  .travel-stripe {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--stripe-a, #c8102e) 0 14px,
+      var(--stripe-b, #faf7f0) 14px 28px
+    );
   }
-  .btn-primary:hover {
-    animation: glowBurstChampagne 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--color-champagne);
-    border: 1.5px solid var(--color-champagne);
-    border-radius: 27%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background 0.5s cubic-bezier(0.16,1,0.3,1), color 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s cubic-bezier(0.16,1,0.3,1);
-  }
-  .btn-secondary:hover {
-    background: rgba(201,169,110,0.1);
-    transform: scale(1.04);
-    box-shadow: 0 4px 20px rgba(201,169,110,0.2);
+  .travel-stripe-h {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--stripe-a, #c8102e) 0 14px,
+      var(--stripe-b, #faf7f0) 14px 28px
+    );
   }
 
-  /* === Outer glow on gradient text === */
-  .outer-glow-text {
-    position: relative;
-    display: inline-block;
-    isolation: isolate;
+  /* Ticket stub notch via mask */
+  .ticket-edge {
+    --notch: #0a0a0a;
+    -webkit-mask-image: radial-gradient(circle 9px at 0 50%, transparent 98%, #000 100%),
+      radial-gradient(circle 9px at 100% 50%, transparent 98%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: radial-gradient(circle 9px at 0 50%, transparent 98%, #000 100%),
+      radial-gradient(circle 9px at 100% 50%, transparent 98%, #000 100%);
+    mask-composite: intersect;
   }
-  .outer-glow-text::before {
-    content: attr(data-text);
+
+  .perforation {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 10px,
+      var(--notch, #0a0a0a) 10px 12px
+    );
+    background-size: 100% 2px;
+  }
+
+  /* Grain overlay for photography bands */
+  .grain::after {
+    content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.08;
     pointer-events: none;
-    font: inherit;
-    letter-spacing: inherit;
-    color: white;
-    -webkit-text-fill-color: white;
-    background: none;
-    -webkit-background-clip: initial;
-    background-clip: initial;
-    filter: blur(14px);
-    opacity: 0.75;
-    transform: translateZ(0);
   }
-  .outer-glow-text__fill {
+
+  /* Image grade: permanent dark melt (no white-box containers) */
+  .img-grade {
     position: relative;
+  }
+  .img-grade::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.18) 45%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
     z-index: 1;
-    display: inline-block;
+    pointer-events: none;
   }
 
-  /* === Card styling === */
-  .card-premium {
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s cubic-bezier(0.16,1,0.3,1);
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-  .card-premium:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 8px 20px rgba(201,169,110,0.1);
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+}
 
-  /* === Eyebrow label === */
-  .eyebrow {
-    font-family: var(--font-inter), var(--font-label-fallback);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  /* === Section divider line === */
-  .divider-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-champagne) 50%, transparent);
-    opacity: 0.3;
-  }
-
-  /* === Background textures === */
-  .dot-texture {
-    background-image: radial-gradient(circle, #0a1929 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.03;
-  }
-  .diagonal-texture {
-    background-image: repeating-linear-gradient(45deg, #0a1929 0px, #0a1929 1px, transparent 1px, transparent 20px);
-    opacity: 0.02;
-  }
-
-  /* === Hide scrollbar === */
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-  /* === Smooth scroll === */
-  html { scroll-behavior: smooth; }
-
-  /* === Gradient text === */
-  .text-gradient-champagne {
-    background: linear-gradient(135deg, #e0c690 0%, #c9a96e 50%, #9c7c4a 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* === Nav pill === */
-  .nav-pill-bg {
-    background: rgba(245,240,232,0.08);
-  }
-  .nav-pill-bg-light {
-    background: rgba(10,25,41,0.06);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
