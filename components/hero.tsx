@@ -123,7 +123,7 @@ export function Hero() {
                   }}
                   className="aspect-square rounded-md overflow-hidden bg-cream/5 border border-white/10"
                 >
-                  {/* color flood: tile fills school color, crest on top */}
+                  {/* color flood: school-color frame, distinct crest design per tile */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -132,9 +132,9 @@ export function Hero() {
                     style={{ background: s.c1 }}
                   >
                     <img
-                      src="/images/uatc-crest.png"
+                      src={`/images/gen/logos/logo-tile${String(i + 1).padStart(2, "0")}.png`}
                       alt=""
-                      className="w-[78%] h-[78%] object-contain drop-shadow-md"
+                      className="w-full h-full object-cover"
                     />
                   </motion.div>
                   {/* monochrome underlay shown until flood covers it */}
@@ -145,9 +145,9 @@ export function Hero() {
                     className="absolute inset-0 flex items-center justify-center bg-[#141414]"
                   >
                     <img
-                      src="/images/uatc-crest.png"
+                      src={`/images/gen/logos/logo-tile${String(i + 1).padStart(2, "0")}.png`}
                       alt=""
-                      className="w-[62%] h-[62%] object-contain opacity-60 grayscale"
+                      className="w-full h-full object-cover opacity-45 grayscale"
                     />
                   </motion.div>
                 </motion.div>

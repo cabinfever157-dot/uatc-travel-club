@@ -1,0 +1,14 @@
+TILE 1: #8E1838 + #F4E7C5 — Crimson + Cream
+TILE 2: #102A43 + #E2B84A — Navy + Warm Gold
+TILE 3: #C95724 + #245A9A — Burnt Orange + Royal Blue
+TILE 4: #1F5A3A + #E4C43E — Forest Green + Golden Yellow
+TILE 5: #70A9D2 + #F7F5EF — Powder Blue + Warm White
+TILE 6: #6F2338 + #B8BDC3 — Burgundy + Silver
+TILE 7: #512D6D + #D5A940 — Deep Purple + Old Gold
+TILE 8: #D62832 + #202124 — Bright Red + Charcoal
+TILE 9: #191919 + #D0A43A — Black + Athletic Gold
+TILE 10: #2456A6 + #F4F2EA — Royal Blue + Ivory
+TILE 11: #7C2638 + #C8A45C — Garnet + Sand Gold
+TILE 12: #D76A28 + #17634A — Orange + Deep Green
+Use the primary color for the shield field, banners, graduation cap, and globe fill, while the secondary color handles the varsity-letter outline, globe grid, banner/detail accents, and other contrast strokes, with the cream letter interiors and silver sticker border retained where needed for legibility.
+TILES COMPLETE

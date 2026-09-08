@@ -1,0 +1,17 @@
+DETAILED RESPONSE REQUIRED.
+
+Design director question, UATC (University Alumni Travel Club) marketing site. The client supplied a new logo: a shield-style collegiate patch — black central shield field, cream varsity lettering ("UNIVERSITY" top banner, "ALUMNI" center in huge cream block letters with red outline, "TRAVEL CLUB" bottom banner), red banners, red graduation cap + red globe with cream grid lines, gray/silver sticker-like outer border.
+
+The site's hero is an Andy Warhol-style grid: 12 tiles, each showing the SAME logo but recolored so alumni recognize their school colors. Client mock uses tile frame colors: maroon/burgundy, navy, bright red, royal blue, golden yellow, forest green (cream/white inner panel holding the emblem).
+
+QUESTION: Pick the 12 college two-color pairs for the tiles. Requirements:
+1. Each tile = ONE logo variant where the logo's recolorable elements (banners, lettering outline, cap, globe, shield field) swap to that school's colors
+2. Cover the major U.S. conferences and recognizable color families: Big Ten, SEC, Pac-12, ACC, plus independent big names
+3. No two adjacent tiles too similar (grid reads 4 wide x 3 tall)
+4. Avoid trademark-identical combos where a tiny tweak preserves recognition (e.g. shift a hex slightly) — we are NOT using school names or marks, just color families
+5. Include IU (crimson + cream) since the client's example trip is Indiana University to Branson
+
+Output format: a numbered list of 12 tiles, each line exactly:
+TILE <n>: <primary hex> + <secondary hex> — <color-family name only, no school names>
+Then one sentence on the recolor mapping (which logo elements take primary vs secondary).
+End with "TILES COMPLETE". DETAILED RESPONSE REQUIRED.
