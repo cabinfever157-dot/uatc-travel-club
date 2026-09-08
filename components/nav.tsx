@@ -75,9 +75,13 @@ export function Nav() {
           transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
           className="flex items-center gap-3 group"
         >
-          <UatcMark c1="#faf7f0" c2="#c8102e" className="w-11 h-11 group-hover:scale-110 transition-transform duration-500" />
+              <img
+                src="/images/uatc-crest.png"
+                alt="University Alumni Travel Club"
+                className="w-11 h-11 rounded-full ring-1 ring-cream/20 group-hover:scale-110 transition-transform duration-500 object-cover"
+              />
           <span className="font-display text-lg tracking-wide text-cream leading-none">
-            ULTIMATE ALUMNI
+            UNIVERSITY ALUMNI
             <br />
             <span className="text-red">TRAVEL CLUB</span>
           </span>

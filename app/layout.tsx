@@ -14,9 +14,9 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Ultimate Alumni Travel Club — Group Travel for Alumni",
+  title: "University Alumni Travel Club — Group Travel for Alumni",
   description:
-    "Alumni group travel, football weekends, and reunion trips — with your people, in your colors. Members save on every trip. Join the Ultimate Alumni Travel Club.",
+    "Alumni group travel, football weekends, and reunion trips — with your people, in your colors. Members save on every trip. Join the University Alumni Travel Club.",
   keywords: [
     "alumni travel",
     "alumni trips",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "group travel",
   ],
   openGraph: {
-    title: "Ultimate Alumni Travel Club",
+    title: "University Alumni Travel Club",
     description:
       "Group travel for alumni — football weekends, reunions, and adventures in your college colors.",
     type: "website",

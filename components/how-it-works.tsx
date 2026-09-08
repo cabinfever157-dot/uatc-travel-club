@@ -92,7 +92,7 @@ export function HowItWorks() {
                 <span className="text-red">YOU JUST SHOW UP.</span>
               </div>
               <p className="mt-4 text-cream/70 text-sm md:text-base leading-relaxed max-w-md">
-                Join the Ultimate Alumni Travel Club today — your first trip
+                Join the University Alumni Travel Club today — your first trip
                 is waiting, and your seats are held.
               </p>
               <div className="mt-7 flex flex-col sm:flex-row gap-4">

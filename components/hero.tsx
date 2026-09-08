@@ -123,18 +123,18 @@ export function Hero() {
                   }}
                   className="aspect-square rounded-md overflow-hidden bg-cream/5 border border-white/10"
                 >
-                  {/* color flood: starts UATC monochrome, floods school colors */}
+                  {/* color flood: tile fills school color, crest on top */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.9, delay: 1.55 + row * 0.55 }}
-                    className="w-full h-full"
+                    className="w-full h-full flex items-center justify-center"
+                    style={{ background: s.c1 }}
                   >
-                    <UatcMark
-                      c1={s.c2}
-                      c2={s.c1}
-                      className="w-full h-full"
-                      title=""
+                    <img
+                      src="/images/uatc-crest.png"
+                      alt=""
+                      className="w-[78%] h-[78%] object-contain drop-shadow-md"
                     />
                   </motion.div>
                   {/* monochrome underlay shown until flood covers it */}
@@ -142,13 +142,12 @@ export function Hero() {
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 0 }}
                     transition={{ duration: 0.9, delay: 1.55 + row * 0.55 }}
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute inset-0 flex items-center justify-center bg-[#141414]"
                   >
-                    <UatcMark
-                      c1="#5a5a5a"
-                      c2="#141414"
-                      className="w-[62%] h-[62%]"
-                      title=""
+                    <img
+                      src="/images/uatc-crest.png"
+                      alt=""
+                      className="w-[62%] h-[62%] object-contain opacity-60 grayscale"
                     />
                   </motion.div>
                 </motion.div>

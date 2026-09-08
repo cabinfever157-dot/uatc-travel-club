@@ -18,9 +18,13 @@ export function Footer() {
         <div className="grid md:grid-cols-[1.4fr_1fr_1fr] gap-10">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <UatcMark c1="#faf7f0" c2="#c8102e" className="w-12 h-12" />
+              <img
+                src="/images/uatc-crest.png"
+                alt="University Alumni Travel Club"
+                className="w-12 h-12 rounded-full ring-1 ring-cream/20 object-cover"
+              />
               <div className="font-display text-lg leading-none">
-                ULTIMATE ALUMNI
+                UNIVERSITY ALUMNI
                 <br />
                 <span className="text-red">TRAVEL CLUB</span>
               </div>
@@ -86,7 +90,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between gap-3 text-xs text-cream/40">
-          <div>© 2026 Ultimate Alumni Travel Club. All rights reserved.</div>
+          <div>© 2026 University Alumni Travel Club. All rights reserved.</div>
           <div className="tracking-wider uppercase">
             Your crew. Your colors. Your next trip.
           </div>
