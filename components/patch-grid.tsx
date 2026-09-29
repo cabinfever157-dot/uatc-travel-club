@@ -102,13 +102,16 @@ export function PatchGrid() {
         {gridSchools.map((s, i) => (
           <div key={s.id} className="patch-tile aspect-square rounded-md overflow-hidden relative">
             {/* The school crest itself is the flying card. */}
+            {/* NO color backgrounds ever (Damon ruling 9/28): page-black under every tile. */}
             <div
-              className="patch-front absolute inset-0 rounded-md overflow-hidden"
-              style={{ background: s.c1 }}
+              className="patch-front absolute inset-0 rounded-md overflow-hidden bg-black"
             >
               <img
                 src={`/images/gen/logos/logo-tile${String(i + 1).padStart(2, "0")}.png`}
                 alt=""
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover"
                 draggable={false}
               />

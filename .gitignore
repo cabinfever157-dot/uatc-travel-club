@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# UATC logo HD backups (never deploy 17MB originals)
+public/images/gen/logos/_original_hd/
