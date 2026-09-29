@@ -92,7 +92,7 @@ export function TravelSearch() {
     setCanRetry(false);
 
     try {
-      const response = await fetch("/api/travel-token", {
+      const response = await fetch("/.netlify/functions/travel-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ memberKey: getMemberKey() }),
