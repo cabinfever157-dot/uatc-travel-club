@@ -1,9 +1,10 @@
 "use client";
 
-import { UatcMark, TravelStripe } from "@/components/brand";
+import { TravelStripe } from "@/components/brand";
 import { CTA_URL, SIGN_IN_URL } from "@/lib/uatc";
 
 const footerLinks = [
+  { id: "travel", label: "Search Travel" },
   { id: "follow", label: "Follow Your Team" },
   { id: "adventures", label: "Adventures" },
   { id: "savings", label: "Savings" },

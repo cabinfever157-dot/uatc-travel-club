@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { animate, motion, type Variants } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { UatcMark } from "@/components/brand";
 import { CTA_URL, SIGN_IN_URL } from "@/lib/uatc";
 
 const links = [
+  { id: "travel", label: "Search Travel" },
   { id: "follow", label: "Follow Your Team" },
   { id: "adventures", label: "Adventures" },
   { id: "savings", label: "Savings" },
@@ -30,12 +30,61 @@ const item: Variants = {
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [menuHovered, setMenuHovered] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const spotlightX = useRef(0);
+  const ambienceX = useRef(0);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const menu = menuRef.current;
+    if (!menu) return;
+
+    const activeItem = menu.querySelector<HTMLElement>(
+      `[data-index="${activeIndex}"]`
+    );
+    if (!activeItem) return;
+
+    const menuRect = menu.getBoundingClientRect();
+    const itemRect = activeItem.getBoundingClientRect();
+    const targetX = itemRect.left - menuRect.left + itemRect.width / 2;
+
+    animate(ambienceX.current, targetX, {
+      type: "spring",
+      stiffness: 200,
+      damping: 20,
+      onUpdate: (value) => {
+        ambienceX.current = value;
+        menu.style.setProperty("--ambience-x", `${value}px`);
+      },
+    });
+
+    if (!menuHovered) {
+      animate(spotlightX.current, targetX, {
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+        onUpdate: (value) => {
+          spotlightX.current = value;
+          menu.style.setProperty("--spotlight-x", `${value}px`);
+        },
+      });
+    }
+  }, [activeIndex, menuHovered]);
+
+  const moveSpotlight = (event: React.MouseEvent<HTMLDivElement>) => {
+    const menu = menuRef.current;
+    if (!menu) return;
+    const x = event.clientX - menu.getBoundingClientRect().left;
+    spotlightX.current = x;
+    menu.style.setProperty("--spotlight-x", `${x}px`);
+  };
 
   const go = (id: string) => {
     setOpen(false);
@@ -63,7 +112,7 @@ export function Nav() {
           "background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease",
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-2 flex items-center justify-between">
         <motion.a
           href="#"
           onClick={(e) => {
@@ -75,12 +124,12 @@ export function Nav() {
           transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
           className="flex items-center gap-3 group"
         >
-              <img
-                src="/images/uatc-crest.png"
-                alt="University Alumni Travel Club"
-                className="w-11 h-11 rounded-full ring-1 ring-cream/20 group-hover:scale-110 transition-transform duration-500 object-cover"
-              />
-          <span className="font-display text-lg tracking-wide text-cream leading-none">
+          <img
+            src="/images/uatc-navbar-logo.png"
+            alt="University Alumni Travel Club"
+            className="h-28 w-28 md:h-32 md:w-32 object-contain group-hover:scale-105 transition-transform duration-500"
+          />
+          <span className="font-display text-4xl tracking-wide text-cream leading-none">
             UNIVERSITY ALUMNI
             <br />
             <span className="text-red">TRAVEL CLUB</span>
@@ -88,33 +137,64 @@ export function Nav() {
         </motion.a>
 
         <motion.div
-          className="hidden lg:flex items-center gap-8"
+          className="hidden lg:flex items-center gap-3"
           variants={container}
           initial="hidden"
           animate="visible"
         >
-          {links.map((l) => (
-            <motion.button
-              key={l.id}
-              variants={item}
-              onClick={() => go(l.id)}
-              className="relative text-sm font-semibold text-white/60 hover:text-white transition-colors duration-500 cursor-pointer py-1"
-            >
-              {l.label}
-              {/* CTA underline stripe on hover */}
-              <span
-                aria-hidden
-                className="absolute left-0 -bottom-0.5 h-[3px] w-0 travel-stripe-h transition-all duration-500 group-hover:w-full"
-              />
-            </motion.button>
-          ))}
-          <motion.a
+          <motion.div
+            ref={menuRef}
             variants={item}
-            href={SIGN_IN_URL}
-            className="text-sm font-semibold text-cream/70 hover:text-cream transition-colors duration-300"
+            onMouseMove={moveSpotlight}
+            onMouseEnter={() => setMenuHovered(true)}
+            onMouseLeave={() => setMenuHovered(false)}
+            className="relative flex items-center overflow-hidden rounded-full border border-white/10 bg-white/[0.045] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_12px_40px_rgba(0,0,0,0.24)]"
           >
-            Sign In
-          </motion.a>
+            <div className="relative z-10 flex items-center">
+              {links.map((l, index) => (
+                <button
+                  key={l.id}
+                  data-index={index}
+                  onClick={() => {
+                    setActiveIndex(index);
+                    go(l.id);
+                  }}
+                  className={`relative rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200 cursor-pointer ${
+                    activeIndex === index
+                      ? "text-white"
+                      : "text-white/55 hover:text-white"
+                  }`}
+                >
+                  {l.label}
+                </button>
+              ))}
+              <a
+                href={SIGN_IN_URL}
+                className="rounded-full px-3.5 py-2 text-sm font-semibold text-cream/60 transition-colors duration-200 hover:text-cream"
+              >
+                Sign In
+              </a>
+            </div>
+
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute inset-0 z-[1] transition-opacity duration-300 ${
+                menuHovered ? "opacity-100" : "opacity-0"
+              }`}
+              style={{
+                background:
+                  "radial-gradient(130px circle at var(--spotlight-x) 100%, rgba(200,16,46,0.28) 0%, rgba(250,247,240,0.08) 38%, transparent 68%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute bottom-0 left-0 z-[2] h-[2px] w-full"
+              style={{
+                background:
+                  "radial-gradient(64px circle at var(--ambience-x) 0%, #e7334f 0%, rgba(200,16,46,0.5) 45%, transparent 100%)",
+              }}
+            />
+          </motion.div>
           <motion.a
             variants={item}
             href={CTA_URL}

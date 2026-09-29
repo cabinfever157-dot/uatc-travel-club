@@ -34,3 +34,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Access travel search
+
+The homepage embeds the Access Development Travel Client SDK. Session tokens are created by
+`POST /api/travel-token`, so the long-lived Access API key remains server-side.
+
+For local development, copy `.env.example` to `.env.local` and set `ACCESS_API_KEY`. Add the same
+variables in Netlify for the deployed site. Access must whitelist every staging and production
+domain before its iframe will render; the SDK intentionally does not load on `localhost`.
+
+The current defaults use Access' staging authentication endpoint and staging SDK.

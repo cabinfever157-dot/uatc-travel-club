@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { UatcMark, TravelStripe } from "@/components/brand";
-import { SCHOOLS, GRID_SCHOOL_IDS, CTA_URL } from "@/lib/uatc";
+import { TravelStripe } from "@/components/brand";
+import { CTA_URL } from "@/lib/uatc";
 import { PatchGrid } from "@/components/patch-grid";
 
 // HERO — Warhol grid color-flood signature.
@@ -87,10 +87,10 @@ export function Hero() {
               <ArrowRight className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1.5" />
             </a>
             <a
-              href="#adventures"
+              href="#travel"
               className="inline-flex items-center justify-center font-display uppercase tracking-wider text-base text-cream border-b-2 border-red/60 px-2 py-4 transition-colors duration-500 hover:border-red hover:text-white"
             >
-              See upcoming trips
+              Search member rates
             </a>
           </motion.div>
 

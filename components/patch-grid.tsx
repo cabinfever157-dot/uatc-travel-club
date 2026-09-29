@@ -5,11 +5,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SCHOOLS, GRID_SCHOOL_IDS } from "@/lib/uatc";
 
-// THE VARSITY PATCH DROP v2 — Big Man spec + Damon ruling:
-// NO colored crest is ever visible during flight. Tiles fly in showing ONLY
-// the neutral cream patch backing (single visible layer — no 3D backface
-// culling involved). After ALL 12 are seated, a stadium flip wave runs
-// corner->center: each tile folds to 90deg, swaps backing->crest, folds open.
+// THE VARSITY PATCH DROP — the real crest cards fly directly into place.
+// There is no placeholder layer or post-arrival image swap.
 
 const CHOREO: Array<[number, number, number, number, number, number]> = [
   [-760, -120, -80, 12, -6, 0.7],
@@ -26,16 +23,11 @@ const CHOREO: Array<[number, number, number, number, number, number]> = [
   [-880, -40, -120, -14, 7, 0.68],
 ];
 
-const FLIP_ORDER = [0, 3, 8, 11, 1, 2, 9, 10, 4, 7, 5, 6];
-
 const LAUNCH_BASE = 0.82;
 const WAVE_GAP = 0.22;
 const TILE_GAP = 0.07;
 const FLY_DUR = 0.6;
 const SETTLE_DUR = 0.2;
-const FLIP_BASE = 1.72;
-const FLIP_DUR = 0.38;
-const FLIP_STAGGER = 0.05;
 
 export function PatchGrid() {
   const root = useRef<HTMLDivElement>(null);
@@ -44,8 +36,7 @@ export function PatchGrid() {
   useGSAP(
     () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        // assembled grid immediately; crest visible, backing hidden
-        gsap.set(".patch-back", { autoAlpha: 0 });
+        // The assembled image grid is already the default DOM state.
         return;
       }
 
@@ -91,24 +82,13 @@ export function PatchGrid() {
         );
       });
 
-      // STADIUM FLIP WAVE — fold to 90, swap layers, fold open.
-      FLIP_ORDER.forEach((idx, k) => {
-        const inner = tiles[idx].querySelector(".patch-inner") as HTMLElement;
-        const front = tiles[idx].querySelector(".patch-front") as HTMLElement;
-        const back = tiles[idx].querySelector(".patch-back") as HTMLElement;
-        const t0 = FLIP_BASE + k * FLIP_STAGGER;
-        const half = FLIP_DUR / 2;
-
-        tl.to(inner, { scaleX: 0, duration: half, ease: "power2.in" }, t0)
-          .call(() => {
-            back.style.visibility = "hidden";
-            front.style.visibility = "visible";
-          }, [], t0 + half)
-          .fromTo(inner, { scaleX: -1 }, { scaleX: 1, duration: half, ease: "power2.out" }, t0 + half);
-      });
-
       // FINAL LOCK + clear will-change
-      const lockT = FLIP_BASE + FLIP_ORDER.length * FLIP_STAGGER + 0.15;
+      const lockT =
+        LAUNCH_BASE +
+        Math.floor((tiles.length - 1) / 3) * WAVE_GAP +
+        2 * TILE_GAP +
+        FLY_DUR +
+        SETTLE_DUR;
       tl.call(() => {
         tiles.forEach((t) => (t.style.willChange = "auto"));
       }, [], lockT + 0.3);
@@ -121,10 +101,10 @@ export function PatchGrid() {
       <div className="grid grid-cols-4 gap-3 md:gap-4 max-w-md mx-auto lg:ml-auto lg:mr-0">
         {gridSchools.map((s, i) => (
           <div key={s.id} className="patch-tile aspect-square rounded-md overflow-hidden relative">
-            {/* FRONT = school crest — hidden until its flip */}
+            {/* The school crest itself is the flying card. */}
             <div
               className="patch-front absolute inset-0 rounded-md overflow-hidden"
-              style={{ background: s.c1, visibility: "hidden" }}
+              style={{ background: s.c1 }}
             >
               <img
                 src={`/images/gen/logos/logo-tile${String(i + 1).padStart(2, "0")}.png`}
@@ -132,25 +112,6 @@ export function PatchGrid() {
                 className="w-full h-full object-cover"
                 draggable={false}
               />
-            </div>
-            {/* BACK = cream/silver patch backing — the ONLY thing visible until flip */}
-            <div
-              className="patch-back absolute inset-0 rounded-md"
-              style={{
-                background:
-                  "repeating-linear-gradient(45deg, #e9dfc8 0 6px, #e2d6ba 6px 12px)",
-                boxShadow:
-                  "inset 0 0 0 4px rgba(120,115,105,0.35), inset 0 0 24px rgba(0,0,0,0.10)",
-              }}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span
-                  className="font-display select-none"
-                  style={{ fontSize: "2.6rem", color: "rgba(120,115,105,0.45)" }}
-                >
-                  U
-                </span>
-              </div>
             </div>
           </div>
         ))}
