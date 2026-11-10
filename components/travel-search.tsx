@@ -29,6 +29,7 @@ type TravelClient = {
 declare global {
   interface Window {
     travelClient?: TravelClient;
+    travelIframe?: { scrollToTopEnabled: boolean };
   }
 }
 
@@ -59,6 +60,38 @@ function getMemberKey() {
   return memberKey;
 }
 
+function keepTravelScrollPosition(container: HTMLElement) {
+  let restoreScrollSetting: (() => void) | undefined;
+
+  const configureScroll = () => {
+    const iframeState = window.travelIframe;
+    if (restoreScrollSetting || !iframeState || !container.querySelector("iframe")) return;
+
+    const setting = Object.getOwnPropertyDescriptor(iframeState, "scrollToTopEnabled");
+    if (!setting?.configurable || !("value" in setting)) return;
+
+    // Access enables host-page scrolling again when its own tabs change.
+    Object.defineProperty(iframeState, "scrollToTopEnabled", {
+      configurable: true,
+      enumerable: setting.enumerable,
+      get: () => false,
+      set: (enabled: boolean) => {
+        setting.value = enabled;
+      },
+    });
+    restoreScrollSetting = () => Object.defineProperty(iframeState, "scrollToTopEnabled", setting);
+  };
+
+  const observer = new MutationObserver(configureScroll);
+  observer.observe(container, { childList: true });
+  configureScroll();
+
+  return () => {
+    observer.disconnect();
+    restoreScrollSetting?.();
+  };
+}
+
 export function TravelSearch() {
   const [status, setStatus] = useState<TravelStatus>("checking");
   const [message, setMessage] = useState("");
@@ -67,6 +100,9 @@ export function TravelSearch() {
   const started = useRef(false);
 
   useEffect(() => {
+    const container = document.getElementById("access-travel-client");
+    const stopKeepingScrollPosition = container && keepTravelScrollPosition(container);
+
     const timeout = window.setTimeout(() => {
       const isLocal = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
       if (isLocal) {
@@ -81,7 +117,10 @@ export function TravelSearch() {
       setCanLoadSdk(true);
     }, 0);
 
-    return () => window.clearTimeout(timeout);
+    return () => {
+      window.clearTimeout(timeout);
+      stopKeepingScrollPosition?.();
+    };
   }, []);
 
   const initialize = useCallback(async () => {
@@ -135,15 +174,6 @@ export function TravelSearch() {
       setCanRetry(!started.current);
     }
   }, []);
-
-  const showProduct = (view: TravelView) => {
-    if (status !== "ready" || !window.travelClient) return;
-    window.travelClient.navigateTo({ view: "home", start_tab: view });
-    document.getElementById("access-travel-client")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
 
   return (
     <section id="travel" className="relative bg-cream text-ink py-20 md:py-28 overflow-hidden">
@@ -200,7 +230,7 @@ export function TravelSearch() {
             <button
               key={view}
               type="button"
-              onClick={() => showProduct(view)}
+              onClick={() => window.travelClient?.navigateTo({ view: "home", start_tab: view })}
               disabled={status !== "ready"}
               className="group flex min-h-16 items-center justify-center gap-2 border border-ink/15 bg-white px-3 py-3 text-xs sm:text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:border-red hover:text-red disabled:cursor-not-allowed disabled:opacity-45"
             >
