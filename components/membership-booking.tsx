@@ -8,6 +8,8 @@ import { CTA_URL } from "@/lib/uatc";
 
 const FORM_NAME = "uatc-membership";
 const JOINED_KEY = "uatc_membership_completed";
+// The fixed navigation is 128px tall, or 144px at the md breakpoint.
+const BOOKING_SCROLL_OFFSET = "scroll-mt-[156px] md:scroll-mt-[172px]";
 
 const FIELDS = [
   { name: "first-name", label: "First name", autoComplete: "given-name", type: "text", maxLength: 100 },
@@ -17,11 +19,11 @@ const FIELDS = [
 
 export function MembershipBooking() {
   const [joined, setJoined] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   const [error, setError] = useState("");
   const booking = useRef<HTMLDivElement>(null);
   const focusBooking = useRef(false);
-  const submissionPending = useRef(false);
+  const submitted = useRef(false);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -45,7 +47,7 @@ export function MembershipBooking() {
 
   async function joinClub(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submissionPending.current) return;
+    if (submitted.current) return;
 
     const fields = new FormData(event.currentTarget);
     const body = new URLSearchParams({ "form-name": FORM_NAME, "bot-field": String(fields.get("bot-field") ?? "") });
@@ -58,36 +60,38 @@ export function MembershipBooking() {
       body.set(name, value);
     }
 
-    submissionPending.current = true;
-    setSubmitting(true);
-    setError("");
+    submitted.current = true;
+    try {
+      sessionStorage.setItem(JOINED_KEY, "1");
+    } catch {
+      // Booking can still open on this page without browser storage.
+    }
+
+    focusBooking.current = true;
+    setJoined(true);
+
     try {
       const response = await fetch("/membership-form.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body,
+        keepalive: true,
       });
-      if (!response.ok) throw new Error("Signup failed");
-
-      try {
-        sessionStorage.setItem(JOINED_KEY, "1");
-      } catch {
-        // Booking can still open on this page without browser storage.
-      }
-      focusBooking.current = true;
-      setJoined(true);
+      if (!response.ok) setSaveFailed(true);
     } catch {
-      setError("We couldn’t save your signup. Please try again.");
-    } finally {
-      submissionPending.current = false;
-      setSubmitting(false);
+      setSaveFailed(true);
     }
   }
 
   return (
-    <div id="travel" className="scroll-mt-20">
+    <div id="travel" className={BOOKING_SCROLL_OFFSET}>
       {joined ? (
-        <div id="join-club" ref={booking} tabIndex={-1} aria-label="Member booking" className="scroll-mt-20 outline-none">
+        <div id="join-club" ref={booking} tabIndex={-1} aria-label="Member booking" className={BOOKING_SCROLL_OFFSET + " outline-none"}>
+          {saveFailed && (
+            <p role="status" className="bg-cream px-4 py-3 text-center text-sm text-ink">
+              We couldn’t save your signup. You can still search member rates below.
+            </p>
+          )}
           <TravelSearch />
         </div>
       ) : (
@@ -107,7 +111,7 @@ export function MembershipBooking() {
               </a>
             </div>
 
-            <form id="join-club" method="post" action="/membership-form.html" onSubmit={joinClub} className="scroll-mt-28 border border-ink/15 bg-white shadow-lg">
+            <form id="join-club" method="post" action="/membership-form.html" onSubmit={joinClub} className={BOOKING_SCROLL_OFFSET + " border border-ink/15 bg-white shadow-lg"}>
               <TravelStripe a="#c8102e" b="#0a0a0a" className="h-2.5 w-full" />
               <div className="p-6 sm:p-8">
                 <h3 className="font-display text-3xl uppercase">Join the Club</h3>
@@ -125,8 +129,8 @@ export function MembershipBooking() {
                   ))}
                 </div>
                 {error && <p role="alert" className="mt-4 text-sm text-red-2">{error}</p>}
-                <button type="submit" disabled={submitting} className="mt-6 w-full rounded-sm bg-red px-5 py-3.5 font-display uppercase tracking-wider text-white hover:bg-red-2 disabled:opacity-60">
-                  {submitting ? "Joining…" : "Join the Club & See Rates"}
+                <button type="submit" className="mt-6 w-full rounded-sm bg-red px-5 py-3.5 font-display uppercase tracking-wider text-white hover:bg-red-2">
+                  Join the Club &amp; See Rates
                 </button>
               </div>
             </form>
