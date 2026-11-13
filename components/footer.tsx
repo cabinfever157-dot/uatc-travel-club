@@ -37,7 +37,6 @@ export function Footer() {
             <div className="mt-6 flex gap-3">
               <a
                 href={CTA_URL}
-                onClick={(e) => CTA_URL === "#" && e.preventDefault()}
                 className="font-display uppercase tracking-wider text-sm bg-red text-white px-5 py-2.5 rounded-sm hover:bg-red-2 transition-colors duration-500"
               >
                 Join

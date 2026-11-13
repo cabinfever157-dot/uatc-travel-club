@@ -479,7 +479,6 @@ export function FollowYourTeam() {
               </div>
               <a
                 href={CTA_URL}
-                onClick={(event) => CTA_URL === "#" && event.preventDefault()}
                 className="flex w-full items-center justify-between rounded-sm bg-red px-5 py-3 font-display text-sm uppercase tracking-[0.12em] text-white shadow-[0_8px_30px_rgba(200,16,46,0.32)] transition-all duration-300 hover:bg-red-2 hover:shadow-[0_10px_36px_rgba(200,16,46,0.5)]"
               >
                 <span>Join the Club — Free</span>

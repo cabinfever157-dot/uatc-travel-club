@@ -101,7 +101,6 @@ function TicketStub({ trip, i }: { trip: Trip; i: number }) {
             </div>
             <a
               href={CTA_URL}
-              onClick={(e) => CTA_URL === "#" && e.preventDefault()}
               className="shrink-0 inline-flex items-center gap-1.5 font-display uppercase tracking-wider text-sm px-5 py-2.5 rounded-sm transition-all duration-500"
               style={{ background: stripeA, color: stripeB }}
             >
@@ -164,7 +163,6 @@ export function Adventures() {
           {/* Join tile fills the asymmetric grid — uses the adventures photo */}
           <motion.a
             href={CTA_URL}
-            onClick={(e) => CTA_URL === "#" && e.preventDefault()}
             initial={{ opacity: 0, y: 44 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-8% 0px" }}

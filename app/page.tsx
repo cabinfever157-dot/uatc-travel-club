@@ -8,7 +8,7 @@
 // dark-savings → light-how → dark-footer (light bands break the dark run)
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
-import { TravelSearch } from "@/components/travel-search";
+import { MembershipBooking } from "@/components/membership-booking";
 import { PhotoBand } from "@/components/photo-band";
 import { FollowYourTeam } from "@/components/follow-your-team";
 import { StadiumBand } from "@/components/stadium-band";
@@ -22,7 +22,7 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
-      <TravelSearch />
+      <MembershipBooking />
       <PhotoBand
         image="/images/gen/uatc-hero-tailgate.png"
         alt="Alumni tailgate with grills and string lights"

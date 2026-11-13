@@ -198,7 +198,6 @@ export function Nav() {
           <motion.a
             variants={item}
             href={CTA_URL}
-            onClick={(e) => CTA_URL === "#" && e.preventDefault()}
             className="font-display text-sm tracking-wider uppercase bg-red text-white px-6 py-2.5 rounded-sm hover:bg-red-2 transition-all duration-500 shadow-[0_2px_16px_rgba(200,16,46,0.45)] hover:shadow-[0_4px_32px_rgba(200,16,46,0.7)]"
           >
             Join the Club
@@ -240,7 +239,7 @@ export function Nav() {
               </a>
               <a
                 href={CTA_URL}
-                onClick={(e) => CTA_URL === "#" && e.preventDefault()}
+                onClick={() => setOpen(false)}
                 className="flex-1 text-center bg-red text-white px-4 py-2.5 rounded-sm font-display uppercase tracking-wider"
               >
                 Join

@@ -80,7 +80,6 @@ export function Hero() {
           >
             <a
               href={CTA_URL}
-              onClick={(e) => CTA_URL === "#" && e.preventDefault()}
               className="group inline-flex items-center justify-center gap-2 font-display uppercase tracking-wider text-base bg-red text-white px-8 py-4 rounded-sm shadow-[0_4px_28px_rgba(200,16,46,0.5)] transition-all duration-500 hover:bg-red-2 hover:shadow-[0_8px_44px_rgba(200,16,46,0.75)]"
             >
               Join the Club

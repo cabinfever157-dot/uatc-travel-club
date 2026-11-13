@@ -176,7 +176,7 @@ export function TravelSearch() {
   }, []);
 
   return (
-    <section id="travel" className="relative bg-cream text-ink py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-cream text-ink py-20 md:py-28 overflow-hidden">
       {canLoadSdk && (
         <Script
           id="access-travel-sdk"

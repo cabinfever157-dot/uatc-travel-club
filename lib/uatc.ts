@@ -1,6 +1,5 @@
 // UATC site data — single source of truth
-// CTA wiring: swap CTA_URL when the real join/sign-in destination exists.
-export const CTA_URL = "#";
+export const CTA_URL = "#join-club";
 export const SIGN_IN_URL = "#";
 
 export type Conf = "B1G" | "SEC" | "P12";
