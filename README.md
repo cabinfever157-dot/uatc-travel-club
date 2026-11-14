@@ -44,3 +44,9 @@ variables in Netlify for the deployed site. Access must whitelist every staging 
 domain before its iframe will render; the SDK intentionally does not load on `localhost`.
 
 The current defaults use Access' staging authentication endpoint and staging SDK.
+
+## UATC signup archive
+
+Netlify Forms collects `uatc-membership` submissions. The `submission-created` function copies verified signups into the private `uatc-leads` store. Each line of `uatc-signups.txt` contains one JSON record with the submission ID, date, first name, last name, and email address.
+
+Download the file in Netlify under **Data & storage → Blobs → uatc-leads**. Earlier submissions are available under **Forms → uatc-membership**. Manage email copies under **Forms → Submission notifications**.
